@@ -8,7 +8,7 @@ class new_movie(models.Model):
     movie_protagonist = models.CharField(max_length = 40)
     movie_poster = models.CharField(max_length = 150)
 
-class new_tvshow(models.Model):
+class new_show(models.Model):
     show_name = models.CharField(max_length = 40)
     show_release_year = models. IntegerField()
     show_director = models.CharField(max_length = 40)

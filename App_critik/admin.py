@@ -1,3 +1,4 @@
 from django.contrib import admin
+from App_critik.models import *
 
-# Register your models here.
+admin.site.register()
