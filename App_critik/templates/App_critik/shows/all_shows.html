@@ -1,0 +1,23 @@
+{% extends "App_critik/father.html" %}
+{% load static %}
+
+{% block masterhead %}
+series
+{% endblock %}
+
+{% block title %}
+busca tus favoritas
+{% endblock %}
+
+{% block main %}
+
+<div class="card" style="width: 18rem;">
+    <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Agregá una nueva serie</h5>
+      <p class="card-text">Tenes que ser administrador para agregar series</p>
+      <a href="{% url 'add_show' %}" class="btn btn-primary">Acá</a>
+    </div>
+  </div>
+
+{% endblock %}

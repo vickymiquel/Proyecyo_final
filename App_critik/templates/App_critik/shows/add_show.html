@@ -1,0 +1,17 @@
+{% extends "App_critik/father_form.html" %}
+{% load static %}
+
+{% block title %}
+completa los datos de la serie que deseas agragar: 
+{% endblock %}
+
+{% block main %}
+
+<form class="container" method="POST"> {% csrf_token %}
+    <table>
+        {{form_2.as_table}}
+    </table>
+    <input type="submit" value="Publicar" >
+</form> 
+
+{% endblock %}

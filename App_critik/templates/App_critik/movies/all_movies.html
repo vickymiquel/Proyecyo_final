@@ -1,0 +1,23 @@
+{% extends "App_critik/father.html" %}
+{% load static %}
+
+{% block masterhead %}
+películas
+{% endblock %}
+
+{% block title %}
+busca tus favoritas
+{% endblock %}
+
+{% block main %}
+
+<div class="card" style="width: 18rem;">
+    <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Agrega una nueva película</h5>
+      <p class="card-text">Tenes que ser administrador para agregar películas</p>
+      <a href="{% url 'add_movie' %}" class="btn btn-primary">Acá</a>
+    </div>
+  </div>
+
+{% endblock %}
