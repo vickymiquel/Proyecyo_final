@@ -7,7 +7,7 @@ class add_movie_form(forms.Form):
     movie_release_year = forms.IntegerField(label = 'Año de estreno')
     movie_genre = forms.CharField(label = 'Género', max_length = 40)
     movie_director = forms.CharField(label = 'Director/es', max_length = 40)
-    movie_poster = forms.ImageField(label = 'Poster')
+    # movie_poster = forms.ImageField(label = 'Poster')
 
 
 class add_show_form(forms.Form):
@@ -15,7 +15,7 @@ class add_show_form(forms.Form):
     show_year_release = forms.IntegerField(label = "Año de estreno")
     show_director = forms.CharField(label = "Director/es",max_length = 40)
     show_genre = forms.CharField(label = "Género",max_length = 40)
-    show_poster = forms.ImageField(label = "Poster")
+    # show_poster = forms.ImageField(label = "Poster")
 
 class new_movie_review_form(forms.Form):
     Puntaje_de_la_pelicula = forms.IntegerField()
