@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block masterhead %}
-Inicia Sesion
+Registrate
 {% endblock %}
 
 {% block title %}
@@ -15,11 +15,9 @@ Inicia Sesion
 
     {{formulario.as_p}}
 
-    <button type="submit">Iniciar Sesion</button>
+    <button type="submit">Registrate</button>
 
 
 </form>
-
-¿No tienes cuenta?<a href="{% url 'signup' %}">Registrate</a>
 
 {% endblock %}

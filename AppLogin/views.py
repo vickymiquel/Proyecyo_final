@@ -35,14 +35,23 @@ def login(request):
         
     return render(request, "login.html", {"formulario":form})
 
-def register(request):
+def signup(request):
     
     if request.method == "POST":
         
-        form = UserCreationForm(request.POST)
+        form = UserRegister(request.POST)
         
         if form.is_valid():
             
             username = form.cleaned_data["username"]
             form.save()
-            return render()
+            return render(request, "App_critik/home.html", {"bienvenida": "Se ha registrado su usuario correctamente"})
+        
+    else:
+        
+        form = UserRegister()
+        
+    return render(request, "signup.html", {"formulario":form})
+    
+    
+ 

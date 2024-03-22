@@ -3,5 +3,5 @@ from AppLogin.views import *
 
 urlpatterns = [
     path("login/", login, name = "login"),
-    path("register/", register, name = "register")
+    path("signup/", signup, name = "signup")
 ]
