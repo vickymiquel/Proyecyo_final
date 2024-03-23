@@ -1,4 +1,4 @@
-{% extends "father.html" %}
+{% extends "App_critik/father.html" %}
 {% load static %}
 
 {% block masterhead %}
@@ -9,7 +9,7 @@ Inicia Sesion
 
 {% endblock %}
 
-{% block main %}
+{% block subhead %}
 
 {{mensaje}}
 
@@ -22,6 +22,6 @@ Inicia Sesion
 
 </form>
 
-¿No tienes cuenta?<button type="button" class="btn btn-primary btn-lg " href="{% url 'signup' %}" >Registrate ahora</button>
+¿No tienes cuenta?<a href="{% url 'signup' %}">Registrate</a>
 
 {% endblock %}

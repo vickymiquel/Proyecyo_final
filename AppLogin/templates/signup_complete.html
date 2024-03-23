@@ -2,13 +2,11 @@
 {% load static %}
 
 {% block masterhead %}
-Se ha cerrado sesion correctamente
+{{bienvenida}}
 {% endblock %}
 
-{% block title %}
+{% block subhead %}
+<a href="{% url 'login' %}" class="btn btn-primary btn-lg">Inicia Sesión</a>
 
 {% endblock %}
 
-{% block main %}
-
-{% endblock %}
