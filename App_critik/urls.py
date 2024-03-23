@@ -12,8 +12,9 @@ urlpatterns = [
     # SERIES
     path('shows/', shows, name = "shows"),
     path('add_show/', add_show, name = "add_show"),
-    path('new_review/', show_review, name = "new_review"),
+    path('new_review/<int:show_id>', show_review, name = "new_review"),
     path('show_info/<int:show_id>', view_show, name = "show_info"),
+    path('show_review', show_review, name = "show_review"),
 
     # SOBRE NOSOTROS
     path('about/', about, name = "about"),

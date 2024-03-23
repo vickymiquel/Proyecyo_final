@@ -8,14 +8,12 @@ Llene las casillas de lo que quiera modificar
 
 {% block subhead %}
 
-<form action="" method="POST">{% csrf_token %}
-
-    {{formulario.as_p}}
-
+<form  action="" method="POST">{% csrf_token %}
+    <table>
+        {{formulario.as_table}}
+    </table>
+    <br>
     <button type="submit">Confirmar</button>
-
-
 </form>
 
 {% endblock %}
-<!-- -->

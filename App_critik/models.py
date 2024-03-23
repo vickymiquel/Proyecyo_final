@@ -29,3 +29,5 @@ class new_show_review(models.Model):
     show_score = models.IntegerField()
     favorite_show_character = models.CharField(max_length = 30)
     show_review = models.CharField(max_length = 250)
+    def __str__(self):
+        return f"{self.show_score} - {self.show_review}"

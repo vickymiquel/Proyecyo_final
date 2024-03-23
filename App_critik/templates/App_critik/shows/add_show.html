@@ -6,13 +6,15 @@ completa los datos de la serie que deseas agragar:
 {% endblock %}
 
 {% block main %}
+<div style="width: 40%; margin: auto;">
 
-<form class="container" enctype="multipart/form-data" method="post" action=""> {% csrf_token %}
-    <table>
-        {{form_2.as_table}}
-    </table>
-    <input type="submit" value="Publicar" >
-</form> 
+    <form class="container" enctype="multipart/form-data" method="post" action=""> {% csrf_token %}
+        <table>
+            {{form_2.as_table}}
+        </table>
+        <input type="submit" value="Publicar" >
+    </form> 
 
+</div>
 {% endblock %}
-<!-- -->
+

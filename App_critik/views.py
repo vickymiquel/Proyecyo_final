@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import *
 from django.contrib.auth import *
 from App_critik.models import *
 from App_critik.forms import *
-#
+
 
 def home(request):
     return render(request, "App_critik/home.html")
@@ -50,9 +50,6 @@ def view_movie(request, movie_id):
 
 
 
-
-
-
 # SERIES
 def add_show(request):
 
@@ -88,7 +85,6 @@ def shows(request):
 
 def view_show(request, show_id):
     selected_show = get_object_or_404(new_show, pk = show_id)
-
     return render(request, "App_critik/shows/show.html", {"selected_show":selected_show})
 
 def show_review(request):
@@ -100,13 +96,13 @@ def show_review(request):
 
             info = form_3.cleaned_data
 
-            show_review = new_show_review_form(
-                show_score = info["show_core"],
-                show_favorite_character = info["show_favorite_character"], 
+            review_show = new_show_review(
+                show_score = info["show_score"],
+                favorite_show_character = info["show_favorite_character"], 
                 show_review = info["show_review"], 
             )
             
-            show_review.save()
+            review_show.save()
 
             return render(request, "App_critik/shows/all_shows.html")
         
@@ -114,6 +110,34 @@ def show_review(request):
             form_3 = new_show_review_form()
 
     return render (request, "App_critik/shows/new_review.html", {"form_3":form_3})
+
+
+# def show_review(request, show_review_id):
+
+#     reviewed_show = get_object_or_404(new_show, pk=show_review_id)
+
+#     if request.method == "POST":
+
+#         form_3 = new_show_review_form(request.POST)
+
+#         if form_3.is_valid():
+
+#             info = form_3.cleaned_data
+
+#             reviewed_show = new_show_review(
+#                 show_score = info["show_score"],
+#                 favorite_show_character = info["show_favorite_character"], 
+#                 show_review = info["show_review"], 
+#             )
+
+#             reviewed_show.save()
+
+#             return render(request, "App_critik/shows/all_shows.html")
+        
+#     else:
+#             form_3 = new_show_review_form()
+
+#     return render (request, "App_critik/shows/new_review.html", {"form_3":form_3}, {"reviewed_show":reviewed_show})
 
 
 def about(request):

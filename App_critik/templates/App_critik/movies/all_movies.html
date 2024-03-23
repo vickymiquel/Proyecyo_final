@@ -11,27 +11,31 @@ busca tus favoritas
 
 {% block main %}
 
-<div style="display: flex;">
-
-  <div class="card" style="width: 18rem; margin: 1rem;">
-    <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Agrega una nueva película</h5>
-      <p class="card-text">Tenes que ser administrador para agregar películas</p>
-      <a href="{% url 'add_movie' %}" class="btn btn-primary">Acá</a>
-    </div>
-  </div>
-
-  {% for movie in movie_catalogue %}
-  <div class="card" style="width: 18rem; margin: 1rem;">
-      <img src="/media/{{ movie.movie_poster }}" class="card-img-top pb" alt="{{ movie.movie_name }}">
-      <div class="card-body">
-          <h5 class="card-title">{{ movie.movie_name }}</h5>
-          <p class="card-text">{{ movie.movie_release_year }}</p>
-          <a href="{% url 'movie_info' movie_id=movie.id %}" class="btn btn-primary">Ver reviews</a>
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3 mt-3">
+      <div class="card text-center shadow" style="width: 18rem; margin: 1rem;">
+        <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Agrega una nueva película</h5>
+          <p class="card-text">Tenes que ser administrador para agregar películas</p>
+          <a href="{% url 'add_movie' %}" class="btn btn-primary">Acá</a>
+        </div>
       </div>
+    </div>
+
+    {% for movie in movie_catalogue %}
+    <div class="col-12 col-md-6 col-lg-3 mt-3">
+      <div class="card text-center shadow" style="width: 18rem; margin: 1rem;">
+        <img src="/media/{{ movie.movie_poster }}" class="card-img-top pb" alt="{{ movie.movie_name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ movie.movie_name }}</h5>
+            <p class="card-text">{{ movie.movie_release_year }}</p>
+            <a href="{% url 'movie_info' movie_id=movie.id %}" class="btn btn-primary">Ver reviews</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %} 
   </div>
-  {% endfor %}
-</div>
+</section>
 {% endblock %}
-<!-- -->

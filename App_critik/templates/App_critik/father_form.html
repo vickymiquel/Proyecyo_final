@@ -31,7 +31,35 @@
                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'movies' %}">peliculas</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'shows' %}">series</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'about' %}">sobre nosotros</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'profile' %}">perfil</a></li>
+
+                        {% if request.user.is_authenticated %}
+
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'edit_user' %}"> Editar perfil</a></li>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <li class="nav-item mx-0 mx-lg-1">
+                              <button type="submit" class="nav-link py-3 px-0 px-lg-3 rounded" style="border: none; background: none; cursor: pointer; color: white;">CERRAR SESION</button>
+                            </li>
+                        </form>
+                        <li style="color: white;">Hola {{user.username}}</li>
+                        {% with user.avatar_set.first as miavatar %}
+
+                        {% if miavatar %}
+                        <img src="/media/{{ Avatar.image }}" style="max-width: 300px;" alt= "Avatar">
+
+                        {% else %}
+
+                        <a href="{% url 'avatar' %}" class="btn-chico">Agregar avatar</a>
+                        {% endif %}
+
+                        {% endwith %}
+                        {% else %}
+
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'signup' %}">Registrarse</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'login' %}">Iniciar Sesion</a></li>
+
+                        {% endif %}
+                        
                     </ul>
                 </div>
             </div>
