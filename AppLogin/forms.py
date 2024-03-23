@@ -40,3 +40,5 @@ class AvatarForm(forms.ModelForm):
 
         model = Avatar
         fields = ["image"]
+
+#

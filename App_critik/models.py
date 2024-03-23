@@ -1,5 +1,5 @@
 from django.db import models
-
+#
 class new_movie(models.Model):
     movie_name = models.CharField(max_length = 60)
     movie_release_year = models. IntegerField()

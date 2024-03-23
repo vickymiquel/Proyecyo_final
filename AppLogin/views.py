@@ -136,3 +136,4 @@ def upload_avatar(request):
 def avatar_complete(request):
 
     return render(request, "avatar_complete.html")
+#
