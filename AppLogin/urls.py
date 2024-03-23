@@ -22,4 +22,3 @@ urlpatterns = [
     path("avatar/", upload_avatar, name = "avatar"),
     path("avatar_complete", avatar_complete)
 ]
-#
