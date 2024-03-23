@@ -9,7 +9,7 @@
 
 <div style="display: flex;">
 
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 18rem; margin: 1rem ;">
         <img src="/media/{{ selected_show.show_poster }}" class="card-img-top" alt="selected_show.show_name">
         <div class="card-body">
         <h3 class="card-title">{{ selected_show.show_name }} ({{ selected_show.show_release_year }})</h3>
@@ -21,13 +21,40 @@
         </ul>
     </div>
 
-    <form class="container" enctype="multipart/form-data" method="post" action="">
-        <table>
-            {{form_3.as_table}}
-        </table>
-    </form>
+    <div class="container column">
+        <div class="row-3 card w-75 mb-3">
+            <div class="card-body">
+                <h2 class="card-title">Le doy un puntaje de:</h2>
+                <h5 class="card-text">Mi personaje favorito fue:</h5>
+                <h6 class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate nihil laboriosam, culpa modi optio laborum illo suscipit, vel beatae veritatis soluta saepe. Dignissimos, praesentium temporibus sit provident alias quae cum.</h6>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+            </div>
+        </div>
+
+        <div class="row-3 card w-75 mb-3">
+            <div class="card-body">
+                <h2 class="card-title">Le doy un puntaje de:</h2>
+                <h5 class="card-text">Mi personaje favorito fue:</h5>
+                <h6 class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate nihil laboriosam, culpa modi optio laborum illo suscipit, vel beatae veritatis soluta saepe. Dignissimos, praesentium temporibus sit provident alias quae cum.</h6>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+            </div>
+        </div>
+
+        <div class="row-3 card w-75 mb-3">
+            <div class="card-body">
+                <h2 class="card-title">Le doy un puntaje de:</h2>
+                <h5 class="card-text">Mi personaje favorito fue:</h5>
+                <h6 class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate nihil laboriosam, culpa modi optio laborum illo suscipit, vel beatae veritatis soluta saepe. Dignissimos, praesentium temporibus sit provident alias quae cum.</h6>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+            </div>
+        </div>
+
+    </div>
 
 </div>
+<br>
+<a href="{% url 'show_review'  %}" class="btn btn-primary">Dejar una review</a>
+
 {% endblock %}
 
 {% block main %}

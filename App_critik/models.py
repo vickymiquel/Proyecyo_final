@@ -24,11 +24,15 @@ class new_show(models.Model):
         return f"{self.show_release_year} - {self.show_name}"
 
 class new_movie_review(models.Model):
+    comment = models.ForeignKey(new_movie, on_delete=models.CASCADE, null=True, blank=True)
     movie_score = models.IntegerField()
     favorite_movie_character = models.CharField(max_length = 30)
     movie_review = models.CharField(max_length = 250)
 
 class new_show_review(models.Model):
+    comment = models.ForeignKey(new_show, on_delete=models.CASCADE, null=True, blank=True)
     show_score = models.IntegerField()
     favorite_show_character = models.CharField(max_length = 30)
     show_review = models.CharField(max_length = 250)
+    def __str__(self):
+        return f"{self.show_score} - {self.show_review}"

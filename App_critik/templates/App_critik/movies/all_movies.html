@@ -7,28 +7,41 @@ películas
 
 {% block title %}
 busca tus favoritas
+<form action="/App_critik/search_movie_results" method = "GET"> 
+            
+  <div class="form-floating mb-3">
+      <input type="text" class="form-control" name = "pelicula" id="pelicula" placeholder="Introduce el nombre...">
+      <label for="floatingInput">Introduce el nombre...</label>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value = "Buscar">
+</form>
 {% endblock %}
 
 {% block main %}
 
-<div style="display: flex;">
-
-  <div class="card" style="width: 18rem; margin: 1rem;">
-    <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Agrega una nueva película</h5>
-      <p class="card-text">Tenes que ser administrador para agregar películas</p>
-      <a href="{% url 'add_movie' %}" class="btn btn-primary">Acá</a>
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3 mt-3">
+      <div class="card text-center shadow" style="width: 18rem; margin: 1rem;">
+        <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Agrega una nueva película</h5>
+          <p class="card-text">Tenes que ser administrador para agregar películas</p>
+          <a href="{% url 'add_movie' %}" class="btn btn-primary">Acá</a>
+        </div>
+      </div>
     </div>
-  </div>
 
-  {% for movie in movie_catalogue %}
-  <div class="card" style="width: 18rem; margin: 1rem;">
-      <img src="/media/{{ movie.movie_poster }}" class="card-img-top pb" alt="{{ movie.movie_name }}">
-      <div class="card-body">
-          <h5 class="card-title">{{ movie.movie_name }}</h5>
-          <p class="card-text">{{ movie.movie_release_year }}</p>
-          <a href="{% url 'movie_info' movie_id=movie.id %}" class="btn btn-primary">Ver reviews</a>
+    {% for movie in movie_catalogue %}
+    <div class="col-12 col-md-6 col-lg-3 mt-3">
+      <div class="card text-center shadow" style="width: 18rem; margin: 1rem;">
+        <img src="/media/{{ movie.movie_poster }}" class="card-img-top pb" alt="{{ movie.movie_name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ movie.movie_name }}</h5>
+            <p class="card-text">{{ movie.movie_release_year }}</p>
+            <a href="{% url 'movie_info' movie_id=movie.id %}" class="btn btn-primary">Ver reviews</a>
+        </div>
 
           {% if user.id == movie.usuario_id %}
           <a href="{% url 'edit_movie' movie.movie_name %}" class="btn btn-primary">Editar</a>
@@ -36,7 +49,8 @@ busca tus favoritas
           {% endif %}
 
       </div>
+    </div>
+    {% endfor %} 
   </div>
-  {% endfor %}
-</div>
+</section>
 {% endblock %}

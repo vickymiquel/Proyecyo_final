@@ -44,6 +44,27 @@ def movies(request):
     movie_catalogue = new_movie.objects.all()
     return render(request, "App_critik/movies/all_movies.html", {"movie_catalogue": movie_catalogue})
 
+def search_movie(request):
+    return render(request, "App_critik/shows/all_movies.html")
+
+def search_movie_results(request):
+    
+    if request.GET["pelicula"]:
+
+        pelicula = request.GET["pelicula"]
+
+        available_movies = new_movie.objects.all()
+
+        searched_movie = available_movies.filter(movie_name__icontains = pelicula)     
+
+        return render(request, "App_critik/movies/search_movie_results.html", {"searched_movie":searched_movie, "pelicula":pelicula})
+
+    else:
+        result = "No enviaste datos"
+
+    return HttpResponse(result)
+
+
 def view_movie(request, movie_id):
     selected_movie = get_object_or_404(new_movie, pk = movie_id)
 
@@ -130,34 +151,31 @@ def shows(request):
     show_catalogue = new_show.objects.all()
     return render(request, "App_critik/shows/all_shows.html", {"show_catalogue": show_catalogue})
 
+def search_show(request):
+    return render(request, "App_critik/shows/all_shows.html")
+
+def search_show_results(request):
+    
+    if request.GET["serie"]:
+
+        serie = request.GET["serie"]
+
+        available_shows = new_show.objects.all()
+
+        searched_show = available_shows.filter(show_name__icontains = serie)
+
+
+
+        return render(request, "App_critik/shows/search_show_results.html", {"searched_show":searched_show, "serie":serie})
+
+    else:
+        result = "No enviaste datos"
+
+    return HttpResponse(result)
+
 def view_show(request, show_id):
     selected_show = get_object_or_404(new_show, pk = show_id)
-
     return render(request, "App_critik/shows/show.html", {"selected_show":selected_show})
-
-def show_review(request):
-    if request.method == "POST":
-
-        form_3 = new_show_review_form(request.POST)
-
-        if form_3.is_valid():
-
-            info = form_3.cleaned_data
-
-            show_review = new_show_review_form(
-                show_score = info["show_core"],
-                show_favorite_character = info["show_favorite_character"], 
-                show_review = info["show_review"], 
-            )
-            
-            show_review.save()
-
-            return render(request, "App_critik/shows/all_shows.html")
-        
-    else:
-            form_3 = new_show_review_form()
-
-    return render (request, "App_critik/shows/new_review.html", {"form_3":form_3})
 
 def delete_show(request, Show_name):
     
@@ -206,6 +224,30 @@ def update_show(request, Show_name):
 
     return render(request, "App_critik/shows/edit_show.html", {"form_1":form_1, "show_name": Show_name})
 
+def show_review(request):
+    if request.method == "POST":
+
+        form_3 = new_show_review_form(request.POST)
+
+        if form_3.is_valid():
+
+            info = form_3.cleaned_data
+
+            review_show = new_show_review(
+                show_score = info["show_score"],
+                favorite_show_character = info["show_favorite_character"], 
+                show_review = info["show_review"], 
+            )
+            
+            review_show.save()
+
+            return render(request, "App_critik/shows/all_shows.html")
+        
+    else:
+            form_3 = new_show_review_form()
+
+    return render (request, "App_critik/shows/new_review.html", {"form_3":form_3})
+
 def about(request):
-    pass
+    return render(request, "App_critik/aboutus.html")
 

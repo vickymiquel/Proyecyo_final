@@ -1,5 +1,6 @@
-<form class="container" enctype="multipart/form-data" method="post" action="">
+<form class="container" enctype="multipart/form-data" method="post" action=""> {% csrf_token %}
     <table>
         {{form_3.as_table}}
     </table>
+    <input type="submit" value="Publicar" >
 </form>
