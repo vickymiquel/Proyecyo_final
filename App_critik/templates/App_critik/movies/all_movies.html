@@ -29,6 +29,12 @@ busca tus favoritas
           <h5 class="card-title">{{ movie.movie_name }}</h5>
           <p class="card-text">{{ movie.movie_release_year }}</p>
           <a href="{% url 'movie_info' movie_id=movie.id %}" class="btn btn-primary">Ver reviews</a>
+
+          {% if user.id == movie.usuario_id %}
+          <a href="{% url 'edit_movie' movie.movie_name %}" class="btn btn-primary">Editar</a>
+          <a href="{% url 'delete_movie' movie.movie_name %}" class="btn btn-primary">Eliminar</a>
+          {% endif %}
+
       </div>
   </div>
   {% endfor %}

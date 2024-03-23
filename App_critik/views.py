@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import *
 from django.contrib.auth import *
 from App_critik.models import *
 from App_critik.forms import *
+from django.views.generic.edit import *
 
 def home(request):
     return render(request, "App_critik/home.html")
@@ -21,6 +22,7 @@ def add_movie(request):
             info = form_1.cleaned_data
 
             movie = new_movie(
+                usuario=request.user,
                 movie_name = info["movie_name"], 
                 movie_release_year = info["movie_release_year"], 
                 movie_genre = info["movie_genre"], 
@@ -47,10 +49,52 @@ def view_movie(request, movie_id):
 
     return render(request, "App_critik/movies/movie.html", {"selected_movie":selected_movie})
 
+def delete_movie(request, Movie_name):
+    
+    movie = new_movie.objects.get(movie_name = Movie_name)
+    movie.delete()
+    
+    
+    return render(request, "App_critik/movies/delete_complete.html")
 
+def delete_complete_movie(request):
+    
+    return render(request, "App_critik/movies/delete_complete.html")
 
+def update_movie(request, Movie_name):
+    
+    movie = new_movie.objects.get(movie_name = Movie_name)
+    
+    if request.method == "POST":
+    
+        form_1 = add_movie_form(request.POST, request.FILES)
 
+        if form_1.is_valid():
 
+                info = form_1.cleaned_data
+
+                movie.movie_name = info["movie_name"]
+                movie.movie_release_year = info["movie_release_year"]
+                movie.movie_genre = info["movie_genre"]
+                movie.movie_director = info["movie_director"]
+                movie.movie_protagonist = info["movie_protagonist"]
+                movie.movie_poster= info["movie_poster"]
+
+                movie.save()
+
+                return (request, "App_critik/movies/all_movies.html")
+        
+    else:
+        
+        form_1 = add_movie_form(initial={"movie_name":movie.movie_name, 
+                                         "movie_release_year":movie.movie_release_year, 
+                                         "movie_genre":movie.movie_genre,
+                                         "movie_director":movie.movie_director,
+                                         "movie_protagonist":movie.movie_protagonist,
+                                         "movie_poster":movie.movie_poster
+                                         })
+
+    return render(request, "App_critik/movies/edit_movie.html", {"form_1":form_1, "movie_name": Movie_name})
 
 # SERIES
 def add_show(request):
@@ -64,6 +108,7 @@ def add_show(request):
             info = form_2.cleaned_data
 
             show = new_show(
+                usuario=request.user,
                 show_name = info["show_name"],
                 show_release_year = info["show_release_year"], 
                 show_genre = info["show_genre"], 
@@ -114,40 +159,53 @@ def show_review(request):
 
     return render (request, "App_critik/shows/new_review.html", {"form_3":form_3})
 
+def delete_show(request, Show_name):
+    
+    show = new_show.objects.get(show_name = Show_name)
+    show.delete()
+    
+    
+    return render(request, "App_critik/shows/delete_complete.html")
+
+def delete_complete_show(request):
+    
+    return render(request, "App_critik/shows/delete_complete.html")
+
+def update_show(request, Show_name):
+    
+    show = new_show.objects.get(show_name = Show_name)
+    
+    if request.method == "POST":
+    
+        form_1 = add_show_form(request.POST, request.FILES)
+
+        if form_1.is_valid():
+
+                info = form_1.cleaned_data
+
+                show.show_name = info["show_name"]
+                show.show_release_year = info["show_release_year"]
+                show.show_genre = info["show_genre"]
+                show.show_director = info["show_director"]
+                show.show_protagonist = info["show_protagonist"]
+                show.show_poster= info["show_poster"]
+
+                show.save()
+
+                return (request, "App_critik/shows/all_shows.html")
+        
+    else:
+        
+        form_1 = add_show_form(initial={"show_name":show.show_name, 
+                                         "show_release_year":show.show_release_year, 
+                                         "show_genre":show.show_genre,
+                                         "show_director":show.show_director,
+                                         "show_protagonist":show.show_protagonist,
+                                         "show_poster":show.show_poster
+                                         })
+
+    return render(request, "App_critik/shows/edit_show.html", {"form_1":form_1, "show_name": Show_name})
 
 def about(request):
     pass
 
-
-# LOGIN / PERFIL 
-def profile(requiest):
-    pass
-
-def login(request):
-    
-    if request.method == "POST":
-        
-        form = AuthenticationForm(request, data = request.POST)
-        
-        if form.is_valid():
-            
-            usuario = form.cleaned_data.get("username")
-            contraseña = form.cleaned_data.get("password")
-            
-            user = authenticate(username = usuario, password = contraseña)
-            
-            if user:
-                
-                login(request, user)
-                
-                return render(request, "url")
-            
-        else:
-            
-            return render(request, "url", {"mensaje": "Datos incorrectos"})
-        
-    else:
-        
-        form = AuthenticationForm()
-        
-    return render(request, "login.html", {"form"})

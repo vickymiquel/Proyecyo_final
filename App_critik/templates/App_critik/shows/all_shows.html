@@ -29,6 +29,10 @@ busca tus favoritas
           <h5 class="card-title">{{ show.show_name }}</h5>
           <p class="card-text">{{ show.show_release_year }}</p>
           <a href="{% url 'show_info' show_id=show.id %}" class="btn btn-primary">Ver reviews</a>
+          {% if user.id == show.usuario_id %}
+          <a href="{% url 'edit_show' show.show_name %}" class="btn btn-primary">Editar</a>
+          <a href="{% url 'delete_show' show.show_name %}" class="btn btn-primary">Eliminar</a>
+          {% endif %}
       </div>
   </div>
   {% endfor %}

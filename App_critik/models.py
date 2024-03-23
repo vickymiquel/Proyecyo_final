@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class new_movie(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     movie_name = models.CharField(max_length = 60)
     movie_release_year = models. IntegerField()
     movie_genre = models.CharField(max_length = 40)
@@ -11,6 +13,7 @@ class new_movie(models.Model):
         return f"{self.movie_release_year} - {self.movie_name}"
 
 class new_show(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     show_name = models.CharField(max_length = 60)
     show_release_year = models. IntegerField()
     show_genre = models.CharField(max_length = 40)

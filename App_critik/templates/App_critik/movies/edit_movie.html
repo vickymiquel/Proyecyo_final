@@ -1,0 +1,17 @@
+{% extends "App_critik/father_form.html" %}
+{% load static %}
+
+{% block title %}
+completa los datos de la película que deseas agragar: 
+{% endblock %}
+
+{% block main %}
+
+<form class="container" enctype="multipart/form-data" method="post" action=""> {% csrf_token %}
+    <table>
+        {{form_1.as_table}}
+    </table>
+    <input type="submit" value="Aceptar" >
+</form> 
+
+{% endblock %}
