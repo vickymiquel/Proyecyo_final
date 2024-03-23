@@ -6,7 +6,7 @@ from django.contrib.auth import *
 from AppLogin.models import *
 from AppLogin.forms import *
 
-def login(request):
+def login_view(request):
     
     if request.method == "POST":
         
@@ -23,7 +23,7 @@ def login(request):
                 
                 login(request, user)
                 
-                return render(request, "App_critik/home.html", {"bienvenida": f"Bienvenido/a {user}"})
+                return render(request, "login_complete.html", {"bienvenida": f"Bienvenido/a {user}"})
             
         else:
             
@@ -35,14 +35,64 @@ def login(request):
         
     return render(request, "login.html", {"formulario":form})
 
-def register(request):
+def login_complete(request):
+    
+    return render(request, "login_complete.html")
+
+def signup(request):
     
     if request.method == "POST":
         
-        form = UserCreationForm(request.POST)
+        form = UserRegister(request.POST)
         
         if form.is_valid():
             
             username = form.cleaned_data["username"]
             form.save()
-            return render()
+            return render(request, "signup_complete.html", {"bienvenida": "Se ha registrado su usuario correctamente"})
+        
+    else:
+        
+        form = UserRegister()
+        
+    return render(request, "signup.html", {"formulario":form})
+
+def signup_complete(request):
+    
+    return render(request, "signup_complete.html")
+
+@login_required
+def edit_user(request):
+    
+    usuario = request.user
+    
+    if request.method == "POST":
+        
+        form = EditUser(request.POST)
+        
+        if form.is_valid():
+            
+            info = form.cleaned_data
+            
+            usuario.email = info["email"]
+            usuario.set_password(info["password1"])
+            usuario.fav_movie = info["fav_movie"]
+            usuario.fav_genre = info["fav_genre"]
+            
+            usuario.save()
+            
+            return render(request, "edit_complete.html")
+    
+    else:
+        
+        form = EditUser(initial={
+           "email":usuario.email,
+        })
+        
+    return render(request, "edit_user.html",{"formulario": form, "usuario":usuario}) 
+
+def edit_complete(request):
+    
+    render(request, "edit_complete.html")      
+    
+ 

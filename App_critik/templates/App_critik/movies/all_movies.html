@@ -13,7 +13,7 @@ busca tus favoritas
 
 <div style="display: flex;">
 
-  <div class="card" style="width: 18rem;">
+  <div class="card" style="width: 18rem; margin: 1rem;">
     <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
     <div class="card-body">
       <h5 class="card-title">Agrega una nueva película</h5>
@@ -23,12 +23,12 @@ busca tus favoritas
   </div>
 
   {% for movie in movie_catalogue %}
-  <div class="card" style="width: 18rem;">
+  <div class="card" style="width: 18rem; margin: 1rem;">
       <img src="/media/{{ movie.movie_poster }}" class="card-img-top pb" alt="{{ movie.movie_name }}">
       <div class="card-body">
           <h5 class="card-title">{{ movie.movie_name }}</h5>
           <p class="card-text">{{ movie.movie_release_year }}</p>
-          <a href="#" class="btn btn-primary">Ver reviews</a>
+          <a href="{% url 'movie_info' movie_id=movie.id %}" class="btn btn-primary">Ver reviews</a>
       </div>
   </div>
   {% endfor %}

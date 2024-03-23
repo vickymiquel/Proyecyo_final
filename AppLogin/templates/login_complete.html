@@ -1,0 +1,14 @@
+{% extends "App_critik/father.html" %}
+{% load static %}
+
+{% block masterhead %}
+{{bienvenida}}
+{% endblock %}
+
+{% block subhead %}
+
+<form action="/AppLogin/logout/" method="POST">{% csrf_token %}
+    <input type="submit">logout </input>
+</form>
+{% endblock %}
+

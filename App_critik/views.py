@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import *
@@ -42,11 +42,15 @@ def movies(request):
     movie_catalogue = new_movie.objects.all()
     return render(request, "App_critik/movies/all_movies.html", {"movie_catalogue": movie_catalogue})
 
-def view_movie(request, id):
-    # print(id)
-    # print("xxxxxx")
-    pass
-    
+def view_movie(request, movie_id):
+    selected_movie = get_object_or_404(new_movie, pk = movie_id)
+
+    return render(request, "App_critik/movies/movie.html", {"selected_movie":selected_movie})
+
+
+
+
+
 
 # SERIES
 def add_show(request):
