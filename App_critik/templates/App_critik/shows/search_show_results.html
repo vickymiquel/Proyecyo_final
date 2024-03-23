@@ -1,0 +1,29 @@
+{% extends "App_critik/father.html" %}
+{% load static %}
+
+{% block masterhead %}
+series
+{% endblock %}
+
+{% block title %}
+Resultados para " {{ serie }} "
+{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    {% for show in searched_show %}
+      <div class="col-12 col-md-6 col-lg-3 mt-3">
+        <div class="card text-center shadow" style="width: 18rem; margin: 1rem;">
+          <img src="/media/{{ show.show_poster }}" class="card-img-top pb" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ show.show_name }}</h5>
+            <p class="card-text">{{ show.show_release_year }}</p>
+            <a href="{% url 'show_info' show_id=show.id %}" class="btn btn-primary">Ver reviews</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+{% endblock %}

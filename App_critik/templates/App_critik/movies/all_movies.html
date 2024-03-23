@@ -7,6 +7,15 @@ películas
 
 {% block title %}
 busca tus favoritas
+<form action="/App_critik/search_movie_results" method = "GET"> 
+            
+  <div class="form-floating mb-3">
+      <input type="text" class="form-control" name = "pelicula" id="pelicula" placeholder="Introduce el nombre...">
+      <label for="floatingInput">Introduce el nombre...</label>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value = "Buscar">
+</form>
 {% endblock %}
 
 {% block main %}
