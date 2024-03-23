@@ -4,6 +4,7 @@
 
 ### Aportes: 
   Matascuso Marcos: AppLogin, edicion y eliminacion de peliculas y series
+ 
   Miquel Victoria: Creacion de series y peliculas, creacion de buscador, creacion de reseñas
 
 ### Comision: 50210
@@ -12,6 +13,7 @@
 
 ### Superusuario: 
   usuario: critik_admin
+  
   contraseña: srbigotes
 
 
