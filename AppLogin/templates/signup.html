@@ -13,7 +13,9 @@ Registrate
 
 <form action="" method="POST">{% csrf_token %}
 
-    {{formulario.as_p}}
+    <table>
+        {{formulario.as_table}}
+    </table>
 
     <button type="submit">Registrate</button>
 

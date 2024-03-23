@@ -1,0 +1,19 @@
+{% extends "App_critik/father_form.html" %}
+{% load static %}
+
+{% block title %}
+completa tu review: 
+{% endblock %}
+
+{% block main %}
+<div style="width: 40%; margin: auto;">
+
+    <form class="container" enctype="multipart/form-data" method="post" action=""> {% csrf_token %}
+        <table>
+            {{form_3.as_table}}
+        </table>
+        <input type="submit" value="Publicar" >
+    </form> 
+
+</div>
+{% endblock %}

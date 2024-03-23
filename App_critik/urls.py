@@ -32,9 +32,9 @@ urlpatterns = [
     path("delete_complete_show/", delete_complete_show),
     
     #REVIEW PELICULA
-    
+    path('movie_review/', movie_review, name = "movie_review"),
+
     #REVIEW SERIE
-    path('new_review/<int:show_id>', show_review, name = "new_review"),
     path('show_review/', show_review, name = "show_review"),
     
     # SOBRE NOSOTROS

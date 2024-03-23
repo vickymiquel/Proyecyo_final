@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import *
@@ -7,10 +7,12 @@ from App_critik.models import *
 from App_critik.forms import *
 from django.views.generic.edit import *
 
+
 def home(request):
     return render(request, "App_critik/home.html")
 
 # PELICULAS
+@login_required
 def add_movie(request):
 
     if request.method == "POST":
@@ -64,12 +66,13 @@ def search_movie_results(request):
 
     return HttpResponse(result)
 
-
+@login_required
 def view_movie(request, movie_id):
-    selected_movie = get_object_or_404(new_movie, pk = movie_id)
+    selected_movie = new_movie.objects.get(id = movie_id)
+    reviews = new_movie_review.objects.filter(movie=movie_id)
+    return render(request, "App_critik/movies/movie.html", {"selected_movie":selected_movie, "reviews": reviews})
 
-    return render(request, "App_critik/movies/movie.html", {"selected_movie":selected_movie})
-
+@login_required
 def delete_movie(request, Movie_name):
     
     movie = new_movie.objects.get(movie_name = Movie_name)
@@ -78,10 +81,12 @@ def delete_movie(request, Movie_name):
     
     return render(request, "App_critik/movies/delete_complete.html")
 
+@login_required
 def delete_complete_movie(request):
     
     return render(request, "App_critik/movies/delete_complete.html")
 
+@login_required
 def update_movie(request, Movie_name):
     
     movie = new_movie.objects.get(movie_name = Movie_name)
@@ -117,7 +122,33 @@ def update_movie(request, Movie_name):
 
     return render(request, "App_critik/movies/edit_movie.html", {"form_1":form_1, "movie_name": Movie_name})
 
+@login_required
+def view_movie_reviews(request):
+    return render(request, "App_critik/movies/new_movie_review.html")
+
+@login_required
+def movie_review(request):
+    movie_catalogue = new_movie.objects.all()
+
+    if request.method == "POST":
+        form_3 = new_movie_review_form(request.POST)
+        if form_3.is_valid():
+            info = form_3.cleaned_data
+            review = new_movie_review(
+                movie = info["movie"],
+                movie_score = info["movie_score"],
+                favorite_movie_character = info["favorite_movie_character"],
+                movie_review = info["movie_review"]
+            )
+            review.save()
+            return render(request, "App_critik/movies/all_movies.html", {"movie_catalogue":movie_catalogue})
+    else:
+        form_3 = new_movie_review_form()
+
+    return render(request, "App_critik/movies/new_movie_review.html", {"form_3": form_3})
+
 # SERIES
+@login_required
 def add_show(request):
 
     if request.method == "POST":
@@ -173,10 +204,13 @@ def search_show_results(request):
 
     return HttpResponse(result)
 
+@login_required
 def view_show(request, show_id):
-    selected_show = get_object_or_404(new_show, pk = show_id)
-    return render(request, "App_critik/shows/show.html", {"selected_show":selected_show})
+    selected_show = new_show.objects.get(id = show_id)
+    reviews = new_show_review.objects.filter(show=show_id)
+    return render(request, "App_critik/shows/show.html", {"selected_show":selected_show, "reviews": reviews})
 
+@login_required
 def delete_show(request, Show_name):
     
     show = new_show.objects.get(show_name = Show_name)
@@ -185,10 +219,12 @@ def delete_show(request, Show_name):
     
     return render(request, "App_critik/shows/delete_complete.html")
 
+@login_required
 def delete_complete_show(request):
     
     return render(request, "App_critik/shows/delete_complete.html")
 
+@login_required
 def update_show(request, Show_name):
     
     show = new_show.objects.get(show_name = Show_name)
@@ -224,29 +260,26 @@ def update_show(request, Show_name):
 
     return render(request, "App_critik/shows/edit_show.html", {"form_1":form_1, "show_name": Show_name})
 
+@login_required
 def show_review(request):
+    show_catalogue = new_show.objects.all()
+
     if request.method == "POST":
-
-        form_3 = new_show_review_form(request.POST)
-
-        if form_3.is_valid():
-
-            info = form_3.cleaned_data
-
-            review_show = new_show_review(
+        form = new_show_review_form(request.POST)
+        if form.is_valid():
+            info = form.cleaned_data
+            review = new_show_review(
+                show = info["show"],
                 show_score = info["show_score"],
-                favorite_show_character = info["show_favorite_character"], 
-                show_review = info["show_review"], 
+                favorite_show_character = info["favorite_show_character"],
+                show_review = info["show_review"]
             )
-            
-            review_show.save()
-
-            return render(request, "App_critik/shows/all_shows.html")
-        
+            review.save()
+            return render(request, "App_critik/shows/all_shows.html", {"show_catalogue":show_catalogue})
     else:
-            form_3 = new_show_review_form()
+        form = new_show_review_form()
 
-    return render (request, "App_critik/shows/new_review.html", {"form_3":form_3})
+    return render(request, "App_critik/shows/new_show_review.html", {"form": form})
 
 def about(request):
     return render(request, "App_critik/aboutus.html")
