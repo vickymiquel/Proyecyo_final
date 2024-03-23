@@ -1,0 +1,38 @@
+{% extends "App_critik/father.html" %}
+{% load static %}
+
+{% block masterhead %}
+   Mira los reviews de {{ selected_show.show_name }}
+{% endblock %}
+
+{% block title %}
+
+<div style="display: flex;">
+
+    <div class="card" style="width: 18rem;">
+        <img src="/media/{{ selected_show.show_poster }}" class="card-img-top" alt="selected_show.show_name">
+        <div class="card-body">
+        <h3 class="card-title">{{ selected_show.show_name }} ({{ selected_show.show_release_year }})</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item"> <h5>Director: {{ selected_show.show_director }}</h5></li>
+        <li class="list-group-item"> <h5>Género: {{ selected_show.show_genre }} </h5></li>
+        <li class="list-group-item"><h5>Protagonista: {{ selected_show.show_protagonist }}</h5></li>
+        </ul>
+    </div>
+
+    <form class="container" enctype="multipart/form-data" method="post" action="">
+        <table>
+            {{form_3.as_table}}
+        </table>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block main %}
+
+
+
+
+{% endblock %}

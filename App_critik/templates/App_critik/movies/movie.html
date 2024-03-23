@@ -2,11 +2,23 @@
 {% load static %}
 
 {% block masterhead %}
-   Mira los reviews de {{ movie.movie_name }}
+   Mira los reviews de {{ selected_movie.movie_name }}
 {% endblock %}
 
 {% block title %}
-busca tus favoritas
+
+<div class="card" style="width: 18rem;">
+    <img src="/media/{{ selected_movie.movie_poster }}" class="card-img-top" alt="selected_movie.movie_name">
+    <div class="card-body">
+      <h3 class="card-title">{{ selected_movie.movie_name }} ({{ selected_movie.movie_release_year }})</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"> <h5>Director: {{ selected_movie.movie_director }}</h5></li>
+      <li class="list-group-item"> <h5>Género: {{ selected_movie.movie_genre }} </h5></li>
+      <li class="list-group-item"><h5>Protagonista: {{ selected_movie.movie_protagonist }}</h5></li>
+    </ul>
+  </div>
+
 {% endblock %}
 
 {% block main %}

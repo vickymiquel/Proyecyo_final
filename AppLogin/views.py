@@ -6,6 +6,9 @@ from django.contrib.auth import *
 from AppLogin.models import *
 from AppLogin.forms import *
 
+
+# LOGIN
+
 def login_view(request):
     
     if request.method == "POST":
@@ -39,6 +42,10 @@ def login_complete(request):
     
     return render(request, "login_complete.html")
 
+
+
+# SIGNUP
+
 def signup(request):
     
     if request.method == "POST":
@@ -61,6 +68,9 @@ def signup_complete(request):
     
     return render(request, "signup_complete.html")
 
+
+
+# EDIT USER
 @login_required
 def edit_user(request):
     
@@ -76,8 +86,8 @@ def edit_user(request):
             
             usuario.email = info["email"]
             usuario.set_password(info["password1"])
-            usuario.fav_movie = info["fav_movie"]
-            usuario.fav_genre = info["fav_genre"]
+            usuario.first_name = info["first_name"]
+            usuario.last_name = info["last_name"]
             
             usuario.save()
             
@@ -87,6 +97,8 @@ def edit_user(request):
         
         form = EditUser(initial={
            "email":usuario.email,
+           "first_name":usuario.first_name, 
+           "last_name":usuario.last_name
         })
         
     return render(request, "edit_user.html",{"formulario": form, "usuario":usuario}) 
@@ -95,4 +107,32 @@ def edit_complete(request):
     
     render(request, "edit_complete.html")      
     
- 
+
+
+# AVATAR
+@login_required
+def upload_avatar(request):
+
+    if request.method == "POST":
+
+        form = AvatarForm(request.POST,request.FILES)
+
+        if form.is_valid():
+
+            actualUser = User.objects.get(username=request.user)
+
+            avatar = Avatar(user=actualUser, image = form.cleaned_data["image"])
+
+            avatar.save()
+
+            return render(request, "avatar_complete.html")
+
+    else:
+
+        form = AvatarForm()
+
+    return render(request, "avatar.html", {"formulario":form})
+
+def avatar_complete(request):
+
+    return render(request, "avatar_complete.html")

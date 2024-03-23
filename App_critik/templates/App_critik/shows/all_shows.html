@@ -28,7 +28,7 @@ busca tus favoritas
       <div class="card-body">
           <h5 class="card-title">{{ show.show_name }}</h5>
           <p class="card-text">{{ show.show_release_year }}</p>
-          <a href="/App_critik/show/{{show.id}}" class="btn btn-primary">Ver reviews</a>
+          <a href="{% url 'show_info' show_id=show.id %}" class="btn btn-primary">Ver reviews</a>
       </div>
   </div>
   {% endfor %}

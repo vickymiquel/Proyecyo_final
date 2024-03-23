@@ -1,0 +1,21 @@
+{% extends "App_critik/father.html" %}
+{% load static %}
+
+{% block masterhead %}
+Selecciona la imagen que quieres como avatar
+{% endblock %}
+
+
+{% block subhead %}
+
+<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+    {{formulario.as_p}}
+
+    <button type="submit">Confirmar</button>
+
+
+</form>
+
+
+{% endblock %}
