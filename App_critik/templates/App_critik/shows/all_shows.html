@@ -11,7 +11,9 @@ busca tus favoritas
 
 {% block main %}
 
-<div class="card" style="width: 18rem;">
+<div style="display: flex;">
+
+  <div class="card" style="width: 18rem; margin: 1rem ;">
     <img src="{% static 'App_critik/assets/img/posters/add_movie.jpg' %}" class="card-img-top pb" alt="...">
     <div class="card-body">
       <h5 class="card-title">Agregá una nueva serie</h5>
@@ -19,5 +21,18 @@ busca tus favoritas
       <a href="{% url 'add_show' %}" class="btn btn-primary">Acá</a>
     </div>
   </div>
+
+  {% for show in show_catalogue %}
+  <div class="card" style="width: 18rem; margin: 1rem;">
+      <img src="/media/{{ show.show_poster }}" class="card-img-top pb" alt="{{ show.show_name }}">
+      <div class="card-body">
+          <h5 class="card-title">{{ show.show_name }}</h5>
+          <p class="card-text">{{ show.show_release_year }}</p>
+          <a href="/App_critik/show/{{show.id}}" class="btn btn-primary">Ver reviews</a>
+      </div>
+  </div>
+  {% endfor %}
+
+</div>
 
 {% endblock %}

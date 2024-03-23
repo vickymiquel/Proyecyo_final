@@ -7,7 +7,7 @@ completa los datos de la serie que deseas agragar:
 
 {% block main %}
 
-<form class="container" method="POST"> {% csrf_token %}
+<form class="container" enctype="multipart/form-data" method="post" action=""> {% csrf_token %}
     <table>
         {{form_2.as_table}}
     </table>

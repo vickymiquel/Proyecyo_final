@@ -11,15 +11,23 @@ def home(request):
 
 # PELICULAS
 def add_movie(request):
+
     if request.method == "POST":
 
-        form_1 = add_movie_form(request.POST)
+        form_1 = add_movie_form(request.POST, request.FILES)
 
         if form_1.is_valid():
 
             info = form_1.cleaned_data
 
-            movie = new_movie(movie_name = info["movie_name"], movie_release_year = info["movie_release_year"], movie_genre = info["movie_genre"], movie_director = info["movie_director"],  movie_poster = info["movie_poster"])
+            movie = new_movie(
+                movie_name = info["movie_name"], 
+                movie_release_year = info["movie_release_year"], 
+                movie_genre = info["movie_genre"], 
+                movie_director = info["movie_director"], 
+                movie_protagonist = info["movie_protagonist"], 
+                movie_poster = info["movie_poster"]
+            )
 
             movie.save()
 
@@ -31,20 +39,34 @@ def add_movie(request):
     return render(request, "App_critik/movies/add_movie.html", {"form_1":form_1})
 
 def movies(request):
-    return render(request, "App_critik/movies/all_movies.html")
+    movie_catalogue = new_movie.objects.all()
+    return render(request, "App_critik/movies/all_movies.html", {"movie_catalogue": movie_catalogue})
+
+def view_movie(request, id):
+    # print(id)
+    # print("xxxxxx")
+    pass
+    
 
 # SERIES
 def add_show(request):
 
     if request.method == "POST":
 
-        form_2 = add_show_form(request.POST)
+        form_2 = add_show_form(request.POST, request.FILES)
 
         if form_2.is_valid():
 
             info = form_2.cleaned_data
 
-            show = new_show(show_name = info["show_name"], show_release_year = info["show_release_year"], show_director = info["show_director"], show_postere = info["show_poster"])
+            show = new_show(
+                show_name = info["show_name"],
+                show_release_year = info["show_release_year"], 
+                show_genre = info["show_genre"], 
+                show_director = info["show_director"], 
+                show_protagonist = info["show_protagonist"], 
+                show_poster = info["show_poster"]
+            )
             
             show.save()
 
@@ -56,7 +78,8 @@ def add_show(request):
     return render (request, "App_critik/shows/add_show.html", {"form_2":form_2})
 
 def shows(request):
-    return render(request, "App_critik/shows/all_shows.html")
+    show_catalogue = new_show.objects.all()
+    return render(request, "App_critik/shows/all_shows.html", {"show_catalogue": show_catalogue})
 
 
 def about(request):
@@ -67,3 +90,31 @@ def about(request):
 def profile(requiest):
     pass
 
+def login(request):
+    
+    if request.method == "POST":
+        
+        form = AuthenticationForm(request, data = request.POST)
+        
+        if form.is_valid():
+            
+            usuario = form.cleaned_data.get("username")
+            contraseña = form.cleaned_data.get("password")
+            
+            user = authenticate(username = usuario, password = contraseña)
+            
+            if user:
+                
+                login(request, user)
+                
+                return render(request, "url")
+            
+        else:
+            
+            return render(request, "url", {"mensaje": "Datos incorrectos"})
+        
+    else:
+        
+        form = AuthenticationForm()
+        
+    return render(request, "login.html", {"form"})

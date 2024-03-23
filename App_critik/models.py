@@ -5,14 +5,20 @@ class new_movie(models.Model):
     movie_release_year = models. IntegerField()
     movie_genre = models.CharField(max_length = 40)
     movie_director = models.CharField(max_length = 40)
-    movie_poster = models.ImageField()
+    movie_protagonist = models.CharField(max_length = 40)
+    movie_poster = models.ImageField(upload_to = "posters", null=True, blank=True)
+    def __str__(self):
+        return f"{self.movie_release_year} - {self.movie_name}"
 
 class new_show(models.Model):
     show_name = models.CharField(max_length = 60)
     show_release_year = models. IntegerField()
-    show_director = models.CharField(max_length = 40)
     show_genre = models.CharField(max_length = 40)
-    show_poster = models.ImageField()
+    show_director = models.CharField(max_length = 40)
+    show_protagonist = models.CharField(max_length = 40)
+    show_poster = models.ImageField(upload_to = "posters", null=True, blank=True)
+    def __str__(self):
+        return f"{self.show_release_year} - {self.show_name}"
 
 class new_movie_review(models.Model):
     movie_score = models.IntegerField()
