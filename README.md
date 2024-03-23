@@ -40,3 +40,5 @@ Tambien podremos dejar reseñas en las peliculas o series de otros o las nuetras
 Seremos capaces de buscar alguna serie o pelicula mediante un buscador
 
 En cuanto a nuestro perfil, seremos capaces de editarlo, poderemos agragar una foto de perfil y cerrar sesion
+
+Video: https://youtu.be/PJZkFsW880c
