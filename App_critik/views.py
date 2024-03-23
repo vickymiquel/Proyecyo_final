@@ -5,7 +5,6 @@ from django.contrib.auth.mixins import *
 from django.contrib.auth import *
 from App_critik.models import *
 from App_critik.forms import *
-#
 
 def home(request):
     return render(request, "App_critik/home.html")

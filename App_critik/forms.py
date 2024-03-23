@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
-#
+
 # FORMS DE PELICULAS
 
 class add_movie_form(forms.Form):

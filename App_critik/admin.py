@@ -6,4 +6,3 @@ admin.site.register(new_show)
 admin.site.register(new_movie_review)
 admin.site.register(new_show_review)
 
-#
